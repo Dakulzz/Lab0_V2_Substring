@@ -16,16 +16,16 @@ def solve(seq):
     last = {}
     left = best_i = best_n = 0
     for right, char in enumerate(seq, 1):
-        if char in last:
+        if char in last and last[char] > left:
             left = last[char]
-        last[right] = char
+        last[char] = right
         n = right - left
-        if n >= best_n:
+        if n > best_n:
             best_n, best_i = n, left
     if best_n == 0:
         return "", 0, None, None
     end = best_i + best_n - 1
-    return seq[best_i:best_n], best_n, best_i, end
+    return seq[best_i:best_i+best_n], best_n, best_i, end
 
 
 def main():
